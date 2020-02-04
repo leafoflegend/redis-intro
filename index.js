@@ -12,19 +12,10 @@ let count = 0;
 const get = promisify(redisClient.get).bind(redisClient);
 const set = promisify(redisClient.set).bind(redisClient);
 const expire = promisify(redisClient.expire).bind(redisClient);
+const ping = promisify(redisClient.ping).bind(redisClient);
 
 const startRedis = () => {
-  return new Promise((res, rej) => {
-    redisClient.ping(e => {
-      if (e) {
-        console.error(e);
-        rej(e);
-      } else {
-        console.log('PONG!');
-        res();
-      }
-    });
-  })
+  return ping();
 };
 
 const startServer = () => {
