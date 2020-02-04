@@ -14,8 +14,9 @@ const set = promisify(redisClient.set).bind(redisClient);
 const expire = promisify(redisClient.expire).bind(redisClient);
 const ping = promisify(redisClient.ping).bind(redisClient);
 
-const startRedis = () => {
-  return ping();
+const startRedis = async () => {
+  await ping();
+  console.log('PONG!');
 };
 
 const startServer = () => {
